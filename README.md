@@ -1,5 +1,5 @@
 # Dotfiles
-Points to remeber:
+Points to remeber:\n
 	Edited /etc/xgd/picom.conf:
 		shadow = false (so shadows aren't visible on rounded corners)
 		then restart by running:
