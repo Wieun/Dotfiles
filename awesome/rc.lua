@@ -8,6 +8,7 @@ require "round-client"
 local gears = require("gears")
 local awful = require("awful")
 awful.rules = require("awful.rules")
+
 require("awful.autofocus")
 
 -- Widget and layout library
@@ -130,7 +131,7 @@ local layouts = {
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({1, 2, 3, 4, 5, 6, 7, 8, 9}, s, layouts[1])
+    tags[s] = awful.tag({"Web", "Office", "Programming"}, s, layouts[1])
 end
 -- }}}
 
@@ -533,7 +534,7 @@ clientkeys = gears.table.join(
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it work on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
-for i = 1, 9 do
+for i = 1, 3 do
     globalkeys = gears.table.join(globalkeys,
         -- View tag only.
         awful.key({ modkey }, "#" .. i + 9,
