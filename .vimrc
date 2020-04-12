@@ -26,5 +26,17 @@ set number
 " Set line number mode to relative line numbers. 
 set relativenumber
 
-" Set tabs key to insert 4 spaces. 
-set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+" use 4 spaces for tabs
+set tabstop=4 softtabstop=4 shiftwidth=4
+
+" display indentation guides
+set list listchars=tab:›·,trail:·,extends:»,precedes:«,nbsp:×
+
+" convert spaces to tabs when reading file
+autocmd! bufreadpost * set noexpandtab | retab! 4
+
+" convert tabs to spaces before writing file
+autocmd! bufwritepre * set expandtab | retab! 4
+
+" convert spaces to tabs after writing file (to show guides again)
+autocmd! bufwritepost * set noexpandtab | retab! 4
