@@ -17,8 +17,14 @@ runtime! archlinux.vim
 " do not load defaults if ~/.vimrc is missing
 "let skip_defaults_vim=1
 
-syntax on
+" Enable syntax highlighting.
+syntax on 
 
+" Enable line numbers.
 set number
+
+" Set line number mode to relative line numbers. 
 set relativenumber
+
+" Set tabs key to insert 4 spaces. 
 set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
