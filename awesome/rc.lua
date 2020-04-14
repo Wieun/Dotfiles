@@ -67,7 +67,7 @@ terminal = "kitty"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 browser = "firefox"
-
+prompt  = "dmenu_run"
 font = "Inconsolata 11"
 
 -- {{ These are the power arrow dividers/separators }} --
@@ -131,7 +131,7 @@ local layouts = {
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({"Web", "Office", "Programming"}, s, layouts[1])
+    tags[s] = awful.tag({"Web", "Office", "Programming", "Terminal"}, s, layouts[1])
 end
 -- }}}
 
@@ -278,38 +278,38 @@ mytaglist.buttons = awful.util.table.join(
                     )
 mytasklist = {}
 mytasklist.buttons = awful.util.table.join(
-                     awful.button({ }, 1, function (c)
-                                              if c == client.focus then
-                                                  c.minimized = true
-                                              else
-                                                  -- Without this, the following
-                                                  -- :isvisible() makes no sense
-                                                  c.minimized = false
-                                                  if not c:isvisible() then
-                                                      awful.tag.viewonly(c:tags()[1])
-                                                  end
-                                                  -- This will also un-minimize
-                                                  -- the client, if needed
-                                                  client.focus = c
-                                                  c:raise()
-                                              end
-                                          end),
-                     awful.button({ }, 3, function ()
-                                              if instance then
-                                                  instance:hide()
-                                                  instance = nil
-                                              else
-                                                  instance = awful.menu.clients({ width=250 })
-                                              end
-                                          end),
-                     awful.button({ }, 4, function ()
-                                              awful.client.focus.byidx(1)
-                                              if client.focus then client.focus:raise() end
-                                          end),
-                     awful.button({ }, 5, function ()
-                                              awful.client.focus.byidx(-1)
-                                              if client.focus then client.focus:raise() end
-                                          end))
+                    awful.button({ }, 1, function (c)
+                                            if c == client.focus then
+                                                c.minimized = true
+                                            else
+                                                -- Without this, the following
+                                                -- :isvisible() makes no sense
+                                                c.minimized = false
+                                                if not c:isvisible() then
+                                                    awful.tag.viewonly(c:tags()[1])
+                                                end
+                                                -- This will also un-minimize
+                                                -- the client, if needed
+                                                client.focus = c
+                                                c:raise()
+                                            end
+                                        end),
+                    awful.button({ }, 3, function ()
+                                            if instance then
+                                                instance:hide()
+                                                instance = nil
+                                            else
+                                                instance = awful.menu.clients({ width=250 })
+                                            end
+                                        end),
+                    awful.button({ }, 4, function ()
+                                            awful.client.focus.byidx(1)
+                                            if client.focus then client.focus:raise() end
+                                        end),
+                    awful.button({ }, 5, function ()
+                                            awful.client.focus.byidx(-1)
+                                            if client.focus then client.focus:raise() end
+                                        end))
 
 for s = 1, screen.count() do
     -- Create a promptbox for each screen
@@ -318,10 +318,10 @@ for s = 1, screen.count() do
     -- We need one layoutbox per screen.
     mylayoutbox[s] = awful.widget.layoutbox(s)
     mylayoutbox[s]:buttons(awful.util.table.join(
-                           awful.button({ }, 1, function () awful.layout.inc(layouts, 1) end),
-                           awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end),
-                           awful.button({ }, 4, function () awful.layout.inc(layouts, 1) end),
-                           awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end)))
+                        awful.button({ }, 1, function () awful.layout.inc(layouts, 1) end),
+                        awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end),
+                        awful.button({ }, 4, function () awful.layout.inc(layouts, 1) end),
+                        awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end)))
     -- Create a taglist widget
     mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons)
 
@@ -469,8 +469,13 @@ globalkeys = gears.table.join(
 
     -- Prompt
     awful.key({ modkey },            "r",     function ()
-	    awful.util.spawn("dmenu_run") end,
-	    {description = "launch dmenu", group = "launcher"}),
+        awful.util.spawn(prompt) end,
+        {description = "launch prompt", group = "launcher"}),
+
+    -- Browser
+    awful.key({ modkey },            "b",     function ()
+        awful.util.spawn(browser) end,
+        {description = "launch browser", group = "launcher"}),
 
     awful.key({ modkey }, "x",
               function ()
@@ -534,7 +539,7 @@ clientkeys = gears.table.join(
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it work on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
-for i = 1, 3 do
+for i = 1, 4 do
     globalkeys = gears.table.join(globalkeys,
         -- View tag only.
         awful.key({ modkey }, "#" .. i + 9,
