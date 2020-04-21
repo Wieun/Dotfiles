@@ -30,7 +30,7 @@ set relativenumber
 set tabstop=4 softtabstop=4 shiftwidth=4
 
 " display indentation guides
-set list listchars=tab:›·,trail:·,extends:»,precedes:«,nbsp:×
+set list listchars=tab:ϟ·,trail:·,extends:»,precedes:«,nbsp:×
 
 " convert spaces to tabs when reading file
 autocmd! bufreadpost * set noexpandtab | retab! 4
