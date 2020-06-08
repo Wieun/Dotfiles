@@ -1,3 +1,11 @@
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+(require 'exwm)
+(require 'exwm-config)
+(exwm-config-default)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -19,6 +27,7 @@
  '(indent-tabs-mode nil)
  '(line-number-mode nil)
  '(menu-bar-mode nil)
+ '(package-selected-packages (quote (exwm)))
  '(scroll-bar-mode nil)
  '(tool-bar-mode nil))
 (setq visible-bell 1)
