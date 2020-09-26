@@ -3,9 +3,12 @@
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 (package-initialize)
-(require 'exwm)
-(require 'exwm-config)
-(exwm-config-default)
+;;(require 'exwm)
+;;(require 'exwm-config)
+;;(exwm-config-default)
+(add-to-list 'load-path "~/.emacs.d/evil")
+(require 'evil)
+(evil-mode 1)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -32,6 +35,12 @@
  '(tool-bar-mode nil))
 (setq visible-bell 1)
 (setq inhibit-startup-screen t)
+(setf org-src-fontify-natively t)
+(org-babel-do-load-languages
+ 'org-babel-load-languages 
+ '((C . t)
+   (shell . t)))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
